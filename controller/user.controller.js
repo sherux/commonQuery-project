@@ -53,6 +53,9 @@ const addUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
+    const checkUser = await commonQuery.getData(req.params.id);
+    if (!checkUser) return res.status(200).json({ message: "user not found" });
+
     const users = await commonQuery.updatedData(req.params.id, {
       user_mobile: req.body.userMobile,
     });
@@ -68,6 +71,8 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
+    const checkUser = await commonQuery.getData(req.params.id);
+    if (!checkUser) return res.status(200).json({ message: "user not found" });
     const userData = await commonQuery.deletedData(req.params.id);
 
     res.status(200).json({ message: "Data Deleted succesfully" });

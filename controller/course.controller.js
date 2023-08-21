@@ -39,9 +39,10 @@ const addCourse = async (req, res) => {
       course_description: req.body.courseDescription, // Fixed typo here
       user_id: req.body.userId,
     });
+
     res
       .status(200)
-      .json({ message: "course created successfully", data: course });
+      .json({ message: "course created successfully", data: course.id });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
